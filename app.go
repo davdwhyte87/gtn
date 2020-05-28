@@ -46,8 +46,8 @@ func main() {
 	userRouter.HandleFunc("/reset_pass", controllers.ResetPass).Methods("POST")
 	userRouter.HandleFunc("/me",
 		middlewares.MultipleMiddleware(controllers.GetUser, middlewares.AuthenticationMiddleware)).Methods("GET")
-
-	if err := http.ListenAndServe(":3000", r); err != nil {
+	port := os.Getenv("PORT")
+	if err := http.ListenAndServe(":"+port, r); err != nil {
 		log.Fatal(err)
 	}
 }
