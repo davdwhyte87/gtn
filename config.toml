@@ -1,0 +1,3 @@
+server="localhost"
+database="travelfy"
+secretekey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzIjoiMTIzNDU2Nzg5MCIsIm5hbWUiOiJUcmF2ZWxmeSIsImlhdCI6MTUxNjIzOTAyMn0.1_bUVW3AW4cbIgkMEKkbBIw17NCi58BNVXO0g-VG0uE"
