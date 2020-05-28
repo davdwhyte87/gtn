@@ -2,7 +2,7 @@ package dao
 
 import (
 	"log"
-
+	"os"
 	mgo "gopkg.in/mgo.v2"
 )
 
@@ -16,7 +16,7 @@ var db *mgo.Database
 
 // database collection
 const (
-	COLLECTION = "verxv"
+	COLLECTION = os.Getenv("COLLECTION")
 )
 
 // Connect ... Establish a connection to database
