@@ -1,1 +1,1 @@
-web: bin/gtn
+web: ./gtn
