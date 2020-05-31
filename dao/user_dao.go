@@ -58,6 +58,6 @@ func (m *UserDAO) Delete(user models.User) error {
 func (m *UserDAO) Update(user models.User) error {
 	docID, _ := primitive.ObjectIDFromHex(user.ID.Hex())
 	userb, _ := bson.Marshal(user)
-	_, err := UserCollection.UpdateOne(Ctx, bson.M{"_id": docID}, userb)
+	_, err := UserCollection.UpdateOne(Ctx, bson.M{"_id": docID}, bson.M{"$set":userb})
 	return err
 }
