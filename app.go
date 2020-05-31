@@ -44,6 +44,7 @@ func main() {
 	userRouter.HandleFunc("/confirm", controllers.ConfrimUser).Methods("POST")
 	userRouter.HandleFunc("/send_code", controllers.GetFPassCode).Methods("POST")
 	userRouter.HandleFunc("/reset_pass", controllers.ResetPass).Methods("POST")
+	userRouter.HandleFunc("/all", controllers.GetAllUsers).Methods("GET")
 	userRouter.HandleFunc("/me",
 		middlewares.MultipleMiddleware(controllers.GetUser, middlewares.AuthenticationMiddleware)).Methods("GET")
 	port := os.Getenv("PORT")

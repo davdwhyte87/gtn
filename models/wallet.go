@@ -1,11 +1,11 @@
 package models
 
-import "gopkg.in/mgo.v2/bson"
 
+import 	"go.mongodb.org/mongo-driver/bson/primitive"
 // Wallet ... Data representation of a users wallet
 type Wallet struct {
-	ID     bson.ObjectId `bson:"_id"`
-	UserID bson.ObjectId `bson:"userId"`
+	ID     primitive.ObjectID `bson:"_id"`
+	UserID primitive.ObjectID `bson:"userId"`
 	// Riders []bson.ObjectId
 	Balance   int
 	CreatedAt string

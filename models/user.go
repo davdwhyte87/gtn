@@ -1,14 +1,14 @@
 package models
 
-import "gopkg.in/mgo.v2/bson"
+import 	"go.mongodb.org/mongo-driver/bson/primitive"
 
 // User ... this is a representation of a user on the server
 type User struct {
-	ID        bson.ObjectId `bson:"_id" json:"id"`
-	UserName  string        `bson:"name" json:"name" validate:"required,min=2,max=100"`
-	Email     string        `bson:"email" json:"email" validate:"required,email"`
-	Password  string        `bson:"password" json:"password" validate:"required,alpha"`
-	Confirmed bool          `bson:"confirmed" json:"confirmed"`
+	ID        primitive.ObjectID `bson:"_id" json:"id"`
+	UserName  string        `bson:"user_name"`
+	Email     string        `bson:"email"`
+	Password  string        `bson:"password"`
+	Confirmed bool          `bson:"confirmed"`
 	PassCode  int
 	CreatedAt string
 	UpdatedAt string

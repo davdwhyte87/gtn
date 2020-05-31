@@ -27,7 +27,7 @@ func (m *WalletDAO) FindByEmail(email string) (models.Wallet, error) {
 
 // Insert a user into database
 func (m *WalletDAO) Insert(wallet models.Wallet) error {
-	err := db.C(COLLECTION).Insert(&wallet)
+	_, err := WalletCollection.InsertOne(Ctx, wallet)
 	return err
 }
 

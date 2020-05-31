@@ -13,7 +13,8 @@ import (
 	Utils "github.com/davdwhyte87/gtn/utils"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/joho/godotenv"
-	"gopkg.in/mgo.v2/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	// "gopkg.in/mgo.v2/bson"
 )
 
 var userDao = DAO.UserDAO{}
@@ -49,7 +50,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user.ID = bson.NewObjectId()
+	user.ID = primitive.NewObjectID()
 	user.Confirmed = false
 	user.CreatedAt = Utils.CurrentDate()
 	user.UpdatedAt = Utils.CurrentDate()
@@ -70,7 +71,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	// create a users wallet
 	var wallet Models.Wallet
-	wallet.ID = bson.NewObjectId()
+	wallet.ID = primitive.NewObjectID()
 	wallet.CreatedAt = Utils.CurrentDate()
 	wallet.UpdatedAt = wallet.CreatedAt
 	wallet.Balance = 0
@@ -245,7 +246,7 @@ func ResetPass(w http.ResponseWriter, r *http.Request) {
 	type Req struct {
 		Code        int
 		NewPassword string
-		Email string
+		Email       string
 	}
 	var reqData Req
 	// populate the req object with data from requests
@@ -299,5 +300,21 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 
 	// return user
 	Utils.RespondWithJSON(w, http.StatusOK, user.ReturnUser())
+	return
+}
+
+// GetAllUsers ... this gets all users on the platform
+func GetAllUsers(w http.ResponseWriter, r *http.Request) {
+	var users []Models.User
+	users, errGetUser := userDao.FindAll()
+	if errGetUser != nil {
+		Utils.RespondWithError(w, http.StatusNotFound, errGetUser.Error())
+		return
+	}
+	// return user
+	for _, user := range users {
+		user = user.ReturnUser()
+	}
+	Utils.RespondWithJSON(w, http.StatusOK, users)
 	return
 }
