@@ -56,6 +56,7 @@ func (m *UserDAO) Delete(user models.User) error {
 
 // Update an existing user
 func (m *UserDAO) Update(user models.User) error {
-	_, err := UserCollection.UpdateOne(Ctx, bson.M{"_id": user.ID}, &user)
+	docID, _ := primitive.ObjectIDFromHex(user.ID.Hex())
+	_, err := UserCollection.UpdateOne(Ctx, bson.M{"_id": docID}, &user)
 	return err
 }
