@@ -34,7 +34,7 @@ const (
 //Connect ... Establish a connection to database
 func (m *DatabaseDAO) Connect() {
 	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("SERVER")))
-	ctx, _ := context.WithTimeout(context.Background(), 100*time.Second)
+	ctx, _ := context.WithTimeout(context.Background(), 1000*time.Second)
 	err = client.Connect(ctx)
 	if err != nil {
 		// panic(err)
